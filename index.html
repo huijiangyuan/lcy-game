@@ -3,108 +3,210 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>宝宝按按乐 · Baby Wonder Keys (1-3岁沉浸式视听启蒙游戏)</title>
-  <meta name="description" content="专为1-3岁低幼宝宝设计的3D视听互动游戏，键盘任意键拍打都有惊喜声光效果与萌宠，柔和五声音阶、中英文认知语音与趣味光效。">
+  <title>宝宝趣味游戏乐园 · Baby Fun World (1-3岁沉浸式视听启蒙游戏合集)</title>
+  <meta name="description" content="专为1-3岁低幼宝宝设计的趣味视听启蒙游戏合集，包含3D萌宠乐园、璀璨几何星空、奇幻钢琴屋，键盘乱按、触屏乱戳皆有奇妙声光反馈！">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./src/style.css">
+  <link rel="stylesheet" href="./src/hub.css">
 </head>
 <body>
-  <!-- 3D Canvas Viewport -->
-  <div id="canvas-container">
-    <canvas id="webgl-canvas"></canvas>
+  <!-- Floating background decorations -->
+  <div class="bg-decorations">
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
   </div>
 
-  <!-- Party Mode Glow Border (Activates on rapid smashing) -->
-  <div id="party-border" class="party-glow-border"></div>
-
-  <!-- Top Glassmorphism HUD -->
-  <header class="top-hud">
-    <div class="logo-badge">
-      <span class="logo-icon">🐣</span>
-      <span class="logo-title">宝宝按按乐</span>
-      <div class="combo-counter" title="开心连击数">
-        <span>⭐</span>
-        <span id="combo-num">0</span>
-      </div>
+  <!-- Top Navigation Header -->
+  <header class="hub-nav">
+    <div class="brand-badge">
+      <span class="brand-icon">🐣</span>
+      <span class="brand-text">宝宝趣味游戏乐园</span>
     </div>
 
-    <div class="controls-group">
-      <!-- Switch to Space Sparks Game -->
-      <a href="./baby-game.html" class="hud-btn" style="text-decoration:none; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; border-color: #a5b4fc;" title="切换到：璀璨几何星空乐园">
-        <span>✨</span>
-        <span>切到：璀璨星空</span>
-      </a>
-
-      <!-- Theme Switcher -->
-      <button id="btn-theme" class="hud-btn theme-btn" title="切换梦幻场景">
-        <span id="theme-icon">🌈</span>
-        <span id="theme-text">糖果乐园</span>
-      </button>
-
-      <!-- Gentle BGM Toggle -->
-      <button id="btn-bgm" class="hud-btn" title="柔和八音盒伴奏">
-        <span>🎵</span>
-        <span>八音盒</span>
-      </button>
-
-      <!-- Speech Cognition Toggle -->
-      <button id="btn-speech" class="hud-btn active" title="按字母报读认知语音">
-        <span>🗣️</span>
-        <span>读拼音/词</span>
-      </button>
-
-      <!-- Volume & Mute -->
-      <button id="btn-sound" class="hud-btn active" title="声效开关">
-        <span id="sound-icon">🔊</span>
-        <span>声音</span>
+    <div class="nav-actions">
+      <!-- Random Game Pick -->
+      <button id="btn-random-game" class="hub-btn btn-random" title="随便挑一个玩">
+        <span>🎲</span>
+        <span>随机挑选一个玩</span>
       </button>
 
       <!-- Fullscreen Mode -->
-      <button id="btn-fullscreen" class="hud-btn" title="全屏沉浸（防误触退出）">
+      <button id="btn-fullscreen" class="hub-btn" title="全屏沉浸">
         <span>⛶</span>
         <span>全屏</span>
       </button>
 
-      <!-- Guide / Help -->
-      <button id="btn-help" class="hud-btn" title="家长说明">
+      <!-- Help / Parents Guide -->
+      <button id="btn-help" class="hub-btn" title="家长说明">
         <span>❓</span>
-        <span>玩法</span>
+        <span>家长说明</span>
       </button>
     </div>
   </header>
 
-  <!-- Center Floating Key Pop Alert -->
-  <div class="key-pop-container">
-    <div id="key-pop-card" class="key-pop-card">
-      <div id="key-pop-char" class="key-pop-char">A</div>
-      <div id="key-pop-word" class="key-pop-word">🍎 苹果 Apple</div>
+  <!-- Hero Banner -->
+  <main>
+    <section class="hero-section">
+      <span class="hero-tag">🎈 专为 1-3 岁低幼宝宝量身打造</span>
+      <h1 class="hero-title">每个按键，都是宝宝的魔法！✨</h1>
+      <p class="hero-subtitle">
+        键盘随便拍打、小手屏幕乱戳，都有即时悦耳声光与可爱萌物！天然和谐五声音阶，永不刺耳，给宝宝满满的探索乐趣与成就感。
+      </p>
+    </section>
+
+    <!-- Game Selection Cards -->
+    <section class="games-grid">
+      <!-- Game 1: 3D Wonder Keys -->
+      <a href="./wonder-keys.html" class="game-card card-1" title="进入 3D 萌宠乐园">
+        <div class="card-top">
+          <span class="card-badge">⭐ 人气推荐 · 3D 萌物</span>
+          <span style="font-size: 20px;">🐥</span>
+        </div>
+        <div class="card-banner">
+          <span>🐥</span>
+          <span>🐰</span>
+          <span>🎈</span>
+          <span>🍩</span>
+        </div>
+        <h2 class="card-title">宝宝按按乐 · 3D 萌宠乐园</h2>
+        <p class="card-desc">
+          每次拍打键盘蹦出可爱小黄鸭、软萌小熊、彩虹气球与七彩甜甜圈！支持字母与数字中英语音双语报读，伴随清脆马林巴木琴声。
+        </p>
+        <div class="card-tags">
+          <span class="card-tag">🧸 3D 糖果萌宠</span>
+          <span class="card-tag">🗣️ 双语语音启蒙</span>
+          <span class="card-tag">💥 动态爆裂光效</span>
+          <span class="card-tag">🌈 3大梦幻场景</span>
+        </div>
+        <div class="card-action-btn">
+          <span>立即开始游玩</span>
+          <span>👉</span>
+        </div>
+      </a>
+
+      <!-- Game 2: Space Sparks -->
+      <a href="./baby-game.html" class="game-card card-2" title="进入 璀璨几何星空">
+        <div class="card-top">
+          <span class="card-badge">✨ 唯美护眼 · 柔和辉光</span>
+          <span style="font-size: 20px;">💎</span>
+        </div>
+        <div class="card-banner">
+          <span>💎</span>
+          <span>💖</span>
+          <span>⭐</span>
+          <span>🪐</span>
+        </div>
+        <h2 class="card-title">宝宝开心拍拍乐 · 璀璨几何星空</h2>
+        <p class="card-desc">
+          深邃梦幻的太空星辰，拍按跳出晶莹发光的宝石、立体五角星与爱心，基于微辉光着色器与轻灵八音和弦铃声，唯美舒适。
+        </p>
+        <div class="card-tags">
+          <span class="card-tag">🌌 梦幻深邃星空</span>
+          <span class="card-tag">✨ 柔和微辉光</span>
+          <span class="card-tag">🔔 清脆八音铃</span>
+          <span class="card-tag">🪐 晶莹发光几何</span>
+        </div>
+        <div class="card-action-btn">
+          <span>立即开始游玩</span>
+          <span>👉</span>
+        </div>
+      </a>
+
+      <!-- Game 3: Fantasy Piano House -->
+      <a href="./piano.html" class="game-card card-3" title="进入 奇幻钢琴屋">
+        <div class="card-top">
+          <span class="card-badge">🎹 音乐启蒙 · 动感电音</span>
+          <span style="font-size: 20px;">🎵</span>
+        </div>
+        <div class="card-banner">
+          <span>🎹</span>
+          <span>🐰</span>
+          <span>🎧</span>
+          <span>🌈</span>
+        </div>
+        <h2 class="card-title">奇幻钢琴屋 · 萌趣钢琴与DJ</h2>
+        <p class="card-desc">
+          和可爱的小兔子琴师一起探索音乐世界！彩色灵动琴键、经典名曲引导学弹，开启动感 DJ 模式乱敲按键即可打出超嗨电音鼓点！
+        </p>
+        <div class="card-tags">
+          <span class="card-tag">🎹 真实彩色琴键</span>
+          <span class="card-tag">🐰 萌兔互动吉祥物</span>
+          <span class="card-tag">🎧 动感 DJ 打碟</span>
+          <span class="card-tag">🎼 经典儿歌启蒙</span>
+        </div>
+        <div class="card-action-btn">
+          <span>立即开始游玩</span>
+          <span>👉</span>
+        </div>
+      </a>
+    </section>
+  </main>
+
+  <!-- Bottom Parents Guide Tip -->
+  <footer class="hub-footer">
+    <div class="tip-box">
+      <span>💡</span>
+      <span>家长建议：建议点击右上角「⛶ 全屏」，每个游戏内部均拦截了滚屏快捷键，宝宝乱按乱拍绝不跳出！</span>
     </div>
-  </div>
+  </footer>
 
-  <!-- Bottom Toddler Friendly Tip -->
-  <div class="bottom-tip">
-    <div class="pulse-dot"></div>
-    <span>⌨️ 键盘随便拍、鼠标随便戳、触屏随便滑，每一键都有魔法声光！✨</span>
-  </div>
-
-  <!-- Parent Guide Modal -->
-  <div id="modal-guide" class="modal-overlay">
-    <div class="modal-card">
-      <h2 class="modal-title">👶 家长使用指南</h2>
-      <div class="modal-content">
-        <p><strong>💡 专为1-3岁宝宝设计：</strong></p>
-        <p>1. <strong>全键触发</strong>：宝宝在键盘上双手拍打、乱按任何键，都会跳出萌萌的 3D 小动物、甜甜圈、气球、彩虹或闪光星星！</p>
-        <p>2. <strong>悦耳防刺耳</strong>：采用天然和谐的五声音阶（宫商角徵羽）与内置防爆音限幅器，即使连续重度拍打键盘，声音也像八音盒演奏般悦耳舒服。</p>
-        <p>3. <strong>全屏防误触</strong>：建议点击右上角「⛶ 全屏」，页面已自动拦截空格下滚、返回上页等按键，让宝宝尽情拍打键盘！</p>
-        <p>4. <strong>触屏与鼠标</strong>：同样支持平板戳戳、小手滑动引爆彩色光圈与彩色气泡。</p>
+  <!-- Parent Help Modal -->
+  <div id="modal-guide" style="position:fixed;inset:0;background:rgba(0,0,0,0.45);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:9999;">
+    <div style="background:#fff;padding:32px;border-radius:28px;max-width:500px;width:90%;box-shadow:0 25px 60px rgba(0,0,0,0.25);text-align:center;">
+      <h3 style="font-size:24px;font-weight:800;color:#db2777;margin-bottom:16px;">👶 游戏乐园家长指南</h3>
+      <div style="font-size:15px;line-height:1.8;color:#475569;text-align:left;margin-bottom:24px;">
+        <p><strong>1. 三大主题随心选：</strong>包含 3D 萌宠世界、唯美星空宝石、萌兔钢琴与电音 DJ，全方位激发宝宝视听兴趣。</p>
+        <p><strong>2. 怎么按都有趣：</strong>无论单键轻触、双手整排拍打还是狂点触屏，系统都会给予正面、欢快的声光反馈，绝无挫败感。</p>
+        <p><strong>3. 悦耳防爆音：</strong>采用五声音阶与动态限幅技术，无论多高频的敲击，音量始终柔和悦耳，保护宝宝娇嫩听力。</p>
+        <p><strong>4. 随时返回与切换：</strong>每个游戏内部右上角/左上角均有「🏠 乐园大厅」按钮，随时方便返回或换游戏玩。</p>
       </div>
-      <button id="btn-close-modal" class="modal-close-btn">我知道啦，开始玩！🎉</button>
+      <button id="btn-close-modal" style="background:linear-gradient(135deg, #ec4899, #f43f5e);color:#fff;border:none;padding:12px 32px;border-radius:999px;font-size:16px;font-weight:800;cursor:pointer;">
+        我知道啦，快开始！🎉
+      </button>
     </div>
   </div>
 
-  <!-- Main Application Logic -->
-  <script type="module" src="./src/main.js"></script>
+  <script>
+    // Random Game Launcher
+    const games = ['./wonder-keys.html', './baby-game.html', './piano.html'];
+    const btnRandom = document.getElementById('btn-random-game');
+    if (btnRandom) {
+      btnRandom.addEventListener('click', () => {
+        const pick = games[Math.floor(Math.random() * games.length)];
+        window.location.href = pick;
+      });
+    }
+
+    // Fullscreen Toggle
+    const btnFullscreen = document.getElementById('btn-fullscreen');
+    if (btnFullscreen) {
+      btnFullscreen.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+          btnFullscreen.classList.add('active');
+        } else {
+          document.exitFullscreen().catch(() => {});
+          btnFullscreen.classList.remove('active');
+        }
+      });
+    }
+
+    // Modal Guide
+    const btnHelp = document.getElementById('btn-help');
+    const modalGuide = document.getElementById('modal-guide');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+    if (btnHelp && modalGuide) {
+      btnHelp.addEventListener('click', () => {
+        modalGuide.style.display = 'flex';
+      });
+    }
+    if (btnCloseModal && modalGuide) {
+      btnCloseModal.addEventListener('click', () => {
+        modalGuide.style.display = 'none';
+      });
+    }
+  </script>
 </body>
 </html>

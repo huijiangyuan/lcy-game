@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>奇幻钢琴屋 · Fantasy Piano House (儿童启蒙钢琴与电音DJ)</title>
+  <meta name="description" content="专为低幼宝宝设计的可爱音乐钢琴应用，自由弹奏、学习名曲、动感DJ电音打碟。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-font: 'Fredoka', 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --glass-bg: rgba(255, 255, 255, 0.88);
+      --glass-border: rgba(255, 255, 255, 0.95);
+      --glass-shadow: 0 8px 32px rgba(236, 72, 153, 0.15);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%; overflow: hidden;
+      font-family: var(--primary-font);
+      background: #fdf2f8;
+    }
+
+    /* Top Floating Navigation HUD */
+    .top-nav-hud {
+      position: fixed; top: 12px; left: 16px; right: 16px;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 1000; pointer-events: none;
+    }
+    .hud-badge {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 18px; background: var(--glass-bg);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 2px solid var(--glass-border); border-radius: 999px;
+      box-shadow: var(--glass-shadow); pointer-events: auto;
+    }
+    .hud-icon { font-size: 22px; }
+    .hud-title {
+      font-size: 17px; font-weight: 800;
+      background: linear-gradient(135deg, #e11d48, #db2777);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hud-controls {
+      display: flex; align-items: center; gap: 8px; pointer-events: auto;
+    }
+    .hud-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; background: var(--glass-bg);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 2px solid var(--glass-border); border-radius: 999px;
+      box-shadow: var(--glass-shadow); color: #374151;
+      font-family: var(--primary-font); font-size: 13px; font-weight: 700;
+      text-decoration: none; cursor: pointer; outline: none;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .hud-btn:hover {
+      transform: translateY(-2px) scale(1.05);
+      background: #ffffff;
+      box-shadow: 0 12px 28px rgba(236, 72, 153, 0.22);
+    }
+    .hud-btn:active { transform: translateY(1px) scale(0.96); }
+
+    .iframe-wrapper {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      border: none;
+    }
+    iframe {
+      width: 100%; height: 100%; border: none; display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation HUD -->
+  <header class="top-nav-hud">
+    <div class="hud-badge">
+      <span class="hud-icon">🎹</span>
+      <span class="hud-title">奇幻钢琴屋</span>
+    </div>
+
+    <div class="hud-controls">
+      <!-- Return to Hub -->
+      <a href="./index.html" class="hud-btn" style="background: linear-gradient(135deg, #f43f5e, #ec4899); color: #fff; border-color: #fda4af;" title="返回游戏乐园大厅">
+        <span>🏠</span>
+        <span>大厅</span>
+      </a>
+
+      <!-- Switch to 3D Wonder Keys -->
+      <a href="./wonder-keys.html" class="hud-btn" title="切换到 3D 萌宠乐园">
+        <span>🧸</span>
+        <span>3D萌宠</span>
+      </a>
+
+      <!-- Switch to Space Sparks -->
+      <a href="./baby-game.html" class="hud-btn" title="切换到 璀璨几何星空">
+        <span>✨</span>
+        <span>璀璨星空</span>
+      </a>
+
+      <!-- Fullscreen Toggle -->
+      <button id="btn-fullscreen" class="hud-btn" title="全屏沉浸模式">
+        <span>⛶</span>
+        <span>全屏</span>
+      </button>
+
+      <!-- Direct Link -->
+      <a href="./piano/index.html" target="_blank" class="hud-btn" title="新窗口独立打开">
+        <span>↗</span>
+        <span>独立</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Piano Frame -->
+  <div class="iframe-wrapper">
+    <iframe id="piano-frame" src="./piano/index.html" allow="autoplay; fullscreen"></iframe>
+  </div>
+
+  <script>
+    const btnFullscreen = document.getElementById('btn-fullscreen');
+    if (btnFullscreen) {
+      btnFullscreen.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+          btnFullscreen.classList.add('active');
+        } else {
+          document.exitFullscreen().catch(() => {});
+          btnFullscreen.classList.remove('active');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

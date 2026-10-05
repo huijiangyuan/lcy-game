@@ -7,7 +7,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        babyGame: resolve(__dirname, 'baby-game.html')
+        wonderKeys: resolve(__dirname, 'wonder-keys.html'),
+        babyGame: resolve(__dirname, 'baby-game.html'),
+        piano: resolve(__dirname, 'piano.html')
       }
     }
   }
