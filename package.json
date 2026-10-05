@@ -1,0 +1,18 @@
+{
+  "name": "lcy-game",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "3D toddler interactive keyboard & touch game built with Three.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.4",
+    "three": "^0.174.0"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0"
+  }
+}

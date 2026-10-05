@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>宝宝开心拍拍乐 · Baby Space Sparks (1-3岁晶莹几何星空)</title>
+  <meta name="description" content="专为1-3岁低幼宝宝设计的3D晶莹几何星空拍打小游戏，柔和五声音阶、发光宝石爱心与唯美星空。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-font: 'Fredoka', 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', sans-serif;
+      --glass-bg: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.25);
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+    html, body {
+      width: 100%; height: 100%; overflow: hidden;
+      font-family: var(--primary-font);
+      background: #0e0a26;
+      touch-action: none;
+    }
+    #app { position: fixed; inset: 0; }
+    canvas { display: block; width: 100%; height: 100%; }
+
+    /* Top Navigation HUD */
+    .top-nav-hud {
+      position: fixed; top: 16px; left: 20px; right: 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 100; pointer-events: none;
+    }
+    .hud-badge {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px; background: rgba(30, 20, 70, 0.65);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid var(--glass-border); border-radius: 999px;
+      box-shadow: var(--glass-shadow); pointer-events: auto;
+    }
+    .hud-icon { font-size: 24px; }
+    .hud-title {
+      font-size: 18px; font-weight: 800; letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #a5b4fc, #f472b6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hud-controls {
+      display: flex; align-items: center; gap: 10px; pointer-events: auto;
+    }
+    .hud-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 18px; background: rgba(30, 20, 70, 0.65);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid var(--glass-border); border-radius: 999px;
+      box-shadow: var(--glass-shadow); color: #ffffff;
+      font-family: var(--primary-font); font-size: 14px; font-weight: 700;
+      text-decoration: none; cursor: pointer; outline: none;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .hud-btn:hover {
+      transform: translateY(-2px) scale(1.05);
+      background: rgba(60, 40, 120, 0.85);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+    .hud-btn:active { transform: translateY(1px) scale(0.96); }
+    .hud-btn.switch-btn {
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      border-color: #f472b6;
+    }
+
+    #hint {
+      position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      text-align: center; color: #fff; pointer-events: none; user-select: none;
+      text-shadow: 0 4px 20px rgba(0,0,0,.65); transition: opacity .8s ease;
+      z-index: 10;
+    }
+    #hint .big {
+      font-size: clamp(28px, 6vw, 60px); font-weight: 800; letter-spacing: 2px;
+      background: linear-gradient(135deg, #ffffff, #c7d2fe, #fbcfe8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    #hint .small { font-size: clamp(14px, 2.4vw, 20px); margin-top: 14px; opacity: .9; color: #e0e7ff; }
+
+    #status {
+      position: fixed; left: 50%; top: 16px; transform: translateX(-50%);
+      padding: 8px 20px; border-radius: 999px; font-size: 14px; line-height: 1.4;
+      max-width: 90vw; text-align: center; display: none; user-select: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,.3); z-index: 200;
+    }
+    #footer {
+      position: fixed; left: 0; right: 0; bottom: 14px; text-align: center;
+      color: rgba(255,255,255,.65); font-size: 13px; font-weight: 600;
+      pointer-events: none; user-select: none; z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- Top Glassmorphic Navigation HUD -->
+  <header class="top-nav-hud">
+    <div class="hud-badge">
+      <span class="hud-icon">✨</span>
+      <span class="hud-title">宝宝开心拍拍乐</span>
+    </div>
+
+    <div class="hud-controls">
+      <!-- Switch to 3D Wonder Keys Game -->
+      <a href="./index.html" class="hud-btn switch-btn" title="切换到 3D 萌宠乐园">
+        <span>🧸</span>
+        <span>切换：3D萌宠乐园</span>
+      </a>
+
+      <!-- Sound Toggle -->
+      <button id="btn-sound" class="hud-btn active" title="声效开关">
+        <span id="sound-icon">🔊</span>
+        <span>声音</span>
+      </button>
+
+      <!-- Fullscreen Toggle -->
+      <button id="btn-fullscreen" class="hud-btn" title="全屏沉浸">
+        <span>⛶</span>
+        <span>全屏</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Big Floating Hint -->
+  <div id="hint">
+    <div class="big">宝宝开心拍拍乐</div>
+    <div class="small">用小手随便拍键盘，每个键都有惊喜！</div>
+  </div>
+
+  <div id="status"></div>
+  <div id="footer">家长提示：让孩子任意拍键 / 点屏幕都能玩 · 按任意键开始</div>
+
+  <script type="module" src="./src/baby-game.js"></script>
+</body>
+</html>

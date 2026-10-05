@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>宝宝按按乐 · Baby Wonder Keys (1-3岁沉浸式视听启蒙游戏)</title>
+  <meta name="description" content="专为1-3岁低幼宝宝设计的3D视听互动游戏，键盘任意键拍打都有惊喜声光效果与萌宠，柔和五声音阶、中英文认知语音与趣味光效。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700;800&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+  <!-- 3D Canvas Viewport -->
+  <div id="canvas-container">
+    <canvas id="webgl-canvas"></canvas>
+  </div>
+
+  <!-- Party Mode Glow Border (Activates on rapid smashing) -->
+  <div id="party-border" class="party-glow-border"></div>
+
+  <!-- Top Glassmorphism HUD -->
+  <header class="top-hud">
+    <div class="logo-badge">
+      <span class="logo-icon">🐣</span>
+      <span class="logo-title">宝宝按按乐</span>
+      <div class="combo-counter" title="开心连击数">
+        <span>⭐</span>
+        <span id="combo-num">0</span>
+      </div>
+    </div>
+
+    <div class="controls-group">
+      <!-- Switch to Space Sparks Game -->
+      <a href="./baby-game.html" class="hud-btn" style="text-decoration:none; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; border-color: #a5b4fc;" title="切换到：璀璨几何星空乐园">
+        <span>✨</span>
+        <span>切到：璀璨星空</span>
+      </a>
+
+      <!-- Theme Switcher -->
+      <button id="btn-theme" class="hud-btn theme-btn" title="切换梦幻场景">
+        <span id="theme-icon">🌈</span>
+        <span id="theme-text">糖果乐园</span>
+      </button>
+
+      <!-- Gentle BGM Toggle -->
+      <button id="btn-bgm" class="hud-btn" title="柔和八音盒伴奏">
+        <span>🎵</span>
+        <span>八音盒</span>
+      </button>
+
+      <!-- Speech Cognition Toggle -->
+      <button id="btn-speech" class="hud-btn active" title="按字母报读认知语音">
+        <span>🗣️</span>
+        <span>读拼音/词</span>
+      </button>
+
+      <!-- Volume & Mute -->
+      <button id="btn-sound" class="hud-btn active" title="声效开关">
+        <span id="sound-icon">🔊</span>
+        <span>声音</span>
+      </button>
+
+      <!-- Fullscreen Mode -->
+      <button id="btn-fullscreen" class="hud-btn" title="全屏沉浸（防误触退出）">
+        <span>⛶</span>
+        <span>全屏</span>
+      </button>
+
+      <!-- Guide / Help -->
+      <button id="btn-help" class="hud-btn" title="家长说明">
+        <span>❓</span>
+        <span>玩法</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Center Floating Key Pop Alert -->
+  <div class="key-pop-container">
+    <div id="key-pop-card" class="key-pop-card">
+      <div id="key-pop-char" class="key-pop-char">A</div>
+      <div id="key-pop-word" class="key-pop-word">🍎 苹果 Apple</div>
+    </div>
+  </div>
+
+  <!-- Bottom Toddler Friendly Tip -->
+  <div class="bottom-tip">
+    <div class="pulse-dot"></div>
+    <span>⌨️ 键盘随便拍、鼠标随便戳、触屏随便滑，每一键都有魔法声光！✨</span>
+  </div>
+
+  <!-- Parent Guide Modal -->
+  <div id="modal-guide" class="modal-overlay">
+    <div class="modal-card">
+      <h2 class="modal-title">👶 家长使用指南</h2>
+      <div class="modal-content">
+        <p><strong>💡 专为1-3岁宝宝设计：</strong></p>
+        <p>1. <strong>全键触发</strong>：宝宝在键盘上双手拍打、乱按任何键，都会跳出萌萌的 3D 小动物、甜甜圈、气球、彩虹或闪光星星！</p>
+        <p>2. <strong>悦耳防刺耳</strong>：采用天然和谐的五声音阶（宫商角徵羽）与内置防爆音限幅器，即使连续重度拍打键盘，声音也像八音盒演奏般悦耳舒服。</p>
+        <p>3. <strong>全屏防误触</strong>：建议点击右上角「⛶ 全屏」，页面已自动拦截空格下滚、返回上页等按键，让宝宝尽情拍打键盘！</p>
+        <p>4. <strong>触屏与鼠标</strong>：同样支持平板戳戳、小手滑动引爆彩色光圈与彩色气泡。</p>
+      </div>
+      <button id="btn-close-modal" class="modal-close-btn">我知道啦，开始玩！🎉</button>
+    </div>
+  </div>
+
+  <!-- Main Application Logic -->
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
